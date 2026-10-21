@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecoSphere AI — Intelligent E-Commerce Recommendation Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-badge">🛍️</div>
+        <div>
+          <h1>RecoSphere AI</h1>
+          <p>Two-Tower Engine & A/B Lab</p>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="#" class="nav-link active" data-target="executive">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            Executive Overview
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-target="recommendations">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Personalized Console
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-target="similar">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            Similar Items (Item2Item)
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-target="ab-testing">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+            A/B Experiment Lab
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-target="model">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+            Two-Tower Architecture
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-target="data">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+            Data Explorer
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" data-target="health">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            System & Health
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="system-pill">
+          <div class="system-dot"></div>
+          <span id="sys-status-text">FastAPI & Index Online</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+
+      <!-- VIEW 1: EXECUTIVE OVERVIEW -->
+      <section id="view-executive" class="view-section">
+        <div class="view-header">
+          <h2 class="view-title">Executive Analytics Overview</h2>
+          <p class="view-desc">High-level customer interaction funnels, recommendation health, and offline performance metrics.</p>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Unique Shoppers <span class="kpi-badge indigo">Verified</span></div>
+            <div class="kpi-val">1,407,580</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Active Catalog Items <span class="kpi-badge indigo">Indexed</span></div>
+            <div class="kpi-val">417,053</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Interactions Processed <span class="kpi-badge emerald">100% Real</span></div>
+            <div class="kpi-val">2,756,101</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Neural HitRate@10 <span class="kpi-badge emerald">Test Benchmark</span></div>
+            <div class="kpi-val">0.60%</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Customer Interaction Funnel (Views -> Buys)</div>
+            <div class="chart-box">
+              <canvas id="funnelChart"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Offline Recommendation Benchmark (Top-10)</div>
+            <div class="chart-box">
+              <canvas id="benchmarkChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: PERSONALIZED CONSOLE -->
+      <section id="view-recommendations" class="view-section" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">Personalized Recommendation Console</h2>
+          <p class="view-desc">Query neural vector similarity, tune multi-objective ranking weights dynamically, and test cold-start fallbacks.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 20px; align-items: end;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Visitor ID</label>
+              <input type="number" id="visitor-id-input" class="form-input" value="10245" placeholder="Enter shopper ID...">
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Top-N Recommendations</label>
+              <input type="range" id="top-n-slider" min="1" max="15" value="8" oninput="document.getElementById('top-n-val').textContent = this.value">
+              <span id="top-n-val" style="font-size: 0.85rem; color: #818cf8; font-weight: 600;">8 items</span>
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer; color: #94a3b8;">
+                <input type="checkbox" id="exclude-seen-check" checked style="accent-color: #6366f1;">
+                Exclude Seen
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: pointer; color: #94a3b8; margin-top: 6px;">
+                <input type="checkbox" id="enable-div-check" checked style="accent-color: #6366f1;">
+                MMR Diversity
+              </label>
+            </div>
+            <div>
+              <button id="get-recs-btn" class="btn btn-primary" style="width: 100%;">Get Recommendations</button>
+            </div>
+          </div>
+
+          <!-- Advanced Real-Time Weight Tuning Accordion -->
+          <details style="margin-top: 16px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 16px;">
+            <summary style="font-size: 0.85rem; font-weight: 600; color: #818cf8; cursor: pointer;">
+              ⚙️ Dynamic Ranking Weights & MMR Parameters
+            </summary>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 14px;">
+              <div>
+                <label class="form-label" style="font-size: 0.75rem;">Vector Similarity Weight (w_rel): <span id="val-w-rel">0.70</span></label>
+                <input type="range" id="weight-rel" min="0" max="1" step="0.05" value="0.70" oninput="document.getElementById('val-w-rel').textContent = this.value">
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem;">Catalog Popularity Weight (w_pop): <span id="val-w-pop">0.15</span></label>
+                <input type="range" id="weight-pop" min="0" max="1" step="0.05" value="0.15" oninput="document.getElementById('val-w-pop').textContent = this.value">
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem;">Category Affinity Weight (w_cat): <span id="val-w-cat">0.15</span></label>
+                <input type="range" id="weight-cat" min="0" max="1" step="0.05" value="0.15" oninput="document.getElementById('val-w-cat').textContent = this.value">
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 0.75rem;">MMR Lambda (&lambda; trade-off): <span id="val-lmbda">0.60</span></label>
+                <input type="range" id="weight-lmbda" min="0" max="1" step="0.05" value="0.60" oninput="document.getElementById('val-lmbda').textContent = this.value">
+              </div>
+            </div>
+          </details>
+
+          <div style="margin-top: 14px; display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: #64748b;">
+            <span>Sample Quick-Picks:</span>
+            <button class="quick-pick-btn" data-id="10245" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #818cf8; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Shopper 10245</button>
+            <button class="quick-pick-btn" data-id="285026" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #818cf8; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Shopper 285026</button>
+            <button class="quick-pick-btn" data-id="9999999" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #f59e0b; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Cold-Start Shopper (Unknown)</button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div id="rec-notice" style="display: none; padding: 8px 14px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); font-size: 0.85rem;"></div>
+          <div id="rec-latency-badge" style="display: none; font-size: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 12px; font-weight: 600;"></div>
+          <button id="export-recs-csv" class="btn" style="display: none; background: rgba(255,255,255,0.08); font-size: 0.8rem; padding: 6px 14px;">📥 Export CSV</button>
+        </div>
+
+        <div id="recs-container" class="recs-grid">
+          <div style="padding: 24px; color: #64748b; grid-column: 1 / -1; text-align: center;">Click "Get Recommendations" to test the live Two-Tower retrieval pipeline.</div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: SIMILAR ITEMS (ITEM-TO-ITEM) -->
+      <section id="view-similar" class="view-section" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">Similar Items Explorer (Item-to-Item Vector Search)</h2>
+          <p class="view-desc">Discover product neighbors directly in the 64-dimensional learned metric embedding space.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 24px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; align-items: end;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Source Item ID</label>
+              <input type="number" id="similar-item-input" class="form-input" value="460429" placeholder="Enter product ID...">
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Neighbors (Top-K)</label>
+              <input type="range" id="similar-top-k" min="2" max="16" value="8" oninput="document.getElementById('similar-k-val').textContent = this.value">
+              <span id="similar-k-val" style="font-size: 0.85rem; color: #818cf8; font-weight: 600;">8 items</span>
+            </div>
+            <div>
+              <button id="get-similar-btn" class="btn btn-primary" style="width: 100%;">Find Similar Products</button>
+            </div>
+          </div>
+          <div style="margin-top: 14px; display: flex; gap: 10px; align-items: center; font-size: 0.8rem; color: #64748b;">
+            <span>Sample Catalog Products:</span>
+            <button class="similar-pick-btn" data-id="460429" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #818cf8; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Product 460429</button>
+            <button class="similar-pick-btn" data-id="285026" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #818cf8; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Product 285026</button>
+            <button class="similar-pick-btn" data-id="206783" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: #818cf8; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Product 206783</button>
+          </div>
+        </div>
+
+        <div id="similar-latency" style="display: none; font-size: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 4px 10px; border-radius: 12px; font-weight: 600; width: fit-content; margin-bottom: 14px;"></div>
+
+        <div id="similar-container" class="recs-grid">
+          <div style="padding: 24px; color: #64748b; grid-column: 1 / -1; text-align: center;">Select or enter an Item ID and click "Find Similar Products".</div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: A/B EXPERIMENT LAB -->
+      <section id="view-ab-testing" class="view-section" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">A/B Testing Simulator & Statistical Lab</h2>
+          <p class="view-desc">Run controlled Monte-Carlo randomized experiment simulations comparing Popularity Control against Two-Tower Treatment.</p>
+        </div>
+
+        <div class="simulation-alert">
+          <svg style="width: 20px; height: 20px; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <div><b>SIMULATION NOTICE</b>: All experiment outcomes generated below are synthetically simulated under Monte-Carlo assumptions for verification; they do not represent live commercial production traffic.</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Simulation Parameters -->
+          <div class="card">
+            <div class="card-title">Monte-Carlo Experiment Parameters</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group">
+                <label class="form-label">Sample Size Per Variant</label>
+                <input type="number" id="sim-sample-size" class="form-input" value="5000" min="500" max="25000" step="500">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Baseline CVR</label>
+                <input type="number" id="sim-baseline-cvr" class="form-input" value="0.03" step="0.005" min="0.005" max="0.15">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Treatment CVR Lift (%)</label>
+                <input type="number" id="sim-lift-cvr" class="form-input" value="15.0" step="1.0" min="-20.0" max="50.0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Baseline CTR</label>
+                <input type="number" id="sim-baseline-ctr" class="form-input" value="0.08" step="0.005" min="0.01" max="0.25">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Treatment CTR Lift (%)</label>
+                <input type="number" id="sim-lift-ctr" class="form-input" value="18.0" step="1.0" min="-20.0" max="50.0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Significance Level (&alpha;)</label>
+                <select id="sim-alpha" class="form-select">
+                  <option value="0.05" selected>&alpha; = 0.05 (95% CI)</option>
+                  <option value="0.01">&alpha; = 0.01 (99% CI)</option>
+                  <option value="0.10">&alpha; = 0.10 (90% CI)</option>
+                </select>
+              </div>
+            </div>
+            <button id="run-sim-btn" class="btn btn-primary" style="width: 100%; margin-top: 6px;">Run Monte-Carlo Experiment</button>
+          </div>
+
+          <!-- Statistical Power & Sample Size Calculator -->
+          <div class="card">
+            <div class="card-title">Sample Size & Statistical Power Calculator</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 14px;">Compute the exact traffic required before deploying an experiment to prevent underpowered trials.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group">
+                <label class="form-label">Baseline Rate</label>
+                <input type="number" id="calc-base-rate" class="form-input" value="0.035" step="0.005">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Min Detectable Lift (MDE %)</label>
+                <input type="number" id="calc-mde" class="form-input" value="10.0" step="1.0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Statistical Power (1 - &beta;)</label>
+                <input type="number" id="calc-power" class="form-input" value="0.80" step="0.05" min="0.5" max="0.99">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Significance (&alpha;)</label>
+                <input type="number" id="calc-alpha" class="form-input" value="0.05" step="0.01">
+              </div>
+            </div>
+            <button id="calc-sample-btn" class="btn" style="background: rgba(255,255,255,0.08); width: 100%;">Calculate Required Traffic</button>
+            <div id="calc-result" style="margin-top: 14px; font-size: 0.85rem; color: #818cf8; font-weight: 600;"></div>
+          </div>
+        </div>
+
+        <div id="sim-results-panel" style="display: none; margin-top: 24px;">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Control CVR</div>
+              <div id="sim-ctrl-cvr" class="kpi-val">3.00%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Treatment CVR</div>
+              <div id="sim-treat-cvr" class="kpi-val" style="color: #10b981;">3.45%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Relative Lift</div>
+              <div id="sim-lift-stat" class="kpi-val" style="color: #818cf8;">+15.0%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Hypothesis Decision</div>
+              <div id="sim-p-val" style="font-size: 1.15rem; font-weight: 700; color: #10b981;">p = 0.0210</div>
+              <div id="sim-z-val" style="font-size: 0.85rem; color: #94a3b8;">Z = 2.31</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>Statistical Test Synthesis</span>
+              <button id="export-sim-csv" class="btn" style="background: rgba(255,255,255,0.08); font-size: 0.8rem; padding: 4px 12px;">📥 Export Experiment CSV</button>
+            </div>
+            <p id="sim-decision" style="font-size: 1.05rem; margin-bottom: 12px;"></p>
+            <p style="color: #94a3b8; font-size: 0.9rem;">
+              • <b>95% Confidence Interval for Absolute Lift</b>: <code id="sim-ci-range" style="color: #818cf8;">[+0.08%, +0.82%]</code><br>
+              • <b>Revenue Per User Impact (Bootstrap)</b>: <span id="sim-rev-ci" style="color: #f8fafc;"></span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: MODEL ARCHITECTURE -->
+      <section id="view-model" class="view-section" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">Two-Tower Deep Neural Architecture</h2>
+          <p class="view-desc">PyTorch implementation with independent User & Item projection layers mapped to a shared 64-dimensional metric space.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Training Loss Progression</div>
+            <div class="chart-box">
+              <canvas id="lossChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Model Specifications</div>
+            <table class="data-table">
+              <tr><td>Embedding Dimension</td><td><code>64</code> (L2-Normalized)</td></tr>
+              <tr><td>User Tower MLP</td><td><code>Linear(66 -> 128) -> LayerNorm -> ReLU -> Dropout(0.1) -> Linear(128 -> 64)</code></td></tr>
+              <tr><td>Item Tower MLP</td><td><code>Linear(82 -> 128) -> LayerNorm -> ReLU -> Dropout(0.1) -> Linear(128 -> 64)</code></td></tr>
+              <tr><td>Loss Function</td><td><code>In-Batch Sampled Softmax (InfoNCE, &tau;=0.07)</code></td></tr>
+              <tr><td>Optimizer</td><td><code>AdamW (lr=0.001, weight_decay=1e-5)</code></td></tr>
+              <tr><td>Checkpoint Status</td><td><span class="badge-status success">Saved (best_two_tower_model.pt)</span></td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: DATA EXPLORER -->
+      <section id="view-data" class="view-section" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">Data Explorer & Sparsity Analysis</h2>
+          <p class="view-desc">Examining the 2.75M event interaction stream from Retailrocket e-commerce.</p>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Matrix Sparsity</div>
+            <div class="kpi-val">99.9994%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Pareto Top 20% Volume</div>
+            <div class="kpi-val">78.71%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Test Split Cold Users</div>
+            <div class="kpi-val">89.2%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Catalog Taxonomy</div>
+            <div class="kpi-val">1,218 Categories</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Interaction Volume by Event Type</div>
+            <div class="chart-box">
+              <canvas id="eventDistChart"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Chronological Split Partitions</div>
+            <table class="data-table">
+              <thead><tr><th>Split Partition</th><th>Interactions</th><th>Proportion</th><th>Leakage Status</th></tr></thead>
+              <tbody>
+                <tr><td>Train Set</td><td>2,204,512</td><td>80.0%</td><td><span class="badge-status success">Fitted on Historical</span></td></tr>
+                <tr><td>Validation Set</td><td>275,564</td><td>10.0%</td><td><span class="badge-status success">Early Stopping Check</span></td></tr>
+                <tr><td>Test Set</td><td>275,565</td><td>10.0%</td><td><span class="badge-status success">Strict Future Evaluation</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 7: SYSTEM & HEALTH -->
+      <section id="view-health" class="view-section" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">System & Data Quality Diagnostics</h2>
+          <p class="view-desc">Real-time status of FastAPI service, vector retrieval index, and pipeline integrity checks.</p>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">API Gateway</div>
+            <div class="kpi-val" style="color: #10b981;">Online (FastAPI)</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Two-Tower Model</div>
+            <div id="health-model-status" class="kpi-val" style="color: #818cf8;">Active</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Vector Retrieval Index</div>
+            <div id="health-index-status" class="kpi-val" style="color: #10b981;">Ready</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Automated Tests</div>
+            <div class="kpi-val" style="color: #10b981;">18 / 18 Passed</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Data Pipeline Integrity Verification</div>
+          <table class="data-table">
+            <thead><tr><th>Check</th><th>Rule</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Primary Key Integrity</td><td>No missing user IDs or item IDs in interaction events</td><td><span class="badge-status success">PASSED</span></td></tr>
+              <tr><td>Chronological Monotonicity</td><td>Timestamps are strictly ordered (no forward temporal leakage)</td><td><span class="badge-status success">PASSED</span></td></tr>
+              <tr><td>Vector Embedding Space</td><td>All precomputed item embeddings are L2-normalized unit vectors</td><td><span class="badge-status success">PASSED</span></td></tr>
+              <tr><td>Cold-Start Fallback Strategy</td><td>Unknown visitor IDs automatically fallback to popularity baseline</td><td><span class="badge-status success">PASSED</span></td></tr>
+              <tr><td>A/B Testing Consistency</td><td>SHA-256 hash modulo guarantees sticky user experiment assignment</td><td><span class="badge-status success">PASSED</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Large Raw & Processed Datasets (keep .gitkeep)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Reports (tracked)
+!reports/*.md
+!reports/*.json
+
+# Artifacts (tracking model weights and index under 10MB)
+!artifacts/models/*.pt
+!artifacts/models/*.json
+!artifacts/index/*.pt
