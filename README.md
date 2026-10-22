@@ -4,7 +4,9 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.14%2Bcpu-red.svg)](https://pytorch.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.157-green.svg)](https://fastapi.tiangolo.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.66-FF4B4B.svg)](https://streamlit.io/)
-[![Tests](https://img.shields.io/badge/Tests-18%20Passed-brightgreen.svg)]()
+[![Live Demo](https://img.shields.io/badge/Vercel-Live%20Demo-000000?style=flat&logo=vercel&logoColor=white)](https://recosphere-ai.vercel.app)
+[![API Docs](https://img.shields.io/badge/API-Swagger%20Docs-009688?style=flat&logo=fastapi&logoColor=white)](https://recosphere-ai.vercel.app/docs)
+[![Tests](https://img.shields.io/badge/Tests-24%20Passed-brightgreen.svg)]()
 
 > **Production-Style Two-Tower Deep Recommendation Engine with Fast Vector Retrieval, Multi-Objective Re-ranking, and A/B Testing Experimentation Lab.**
 
