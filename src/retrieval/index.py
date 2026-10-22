@@ -4,8 +4,10 @@ Supports fast inner-product and cosine similarity search over persistent item em
 with fallback to PyTorch tensor matrix multiplication.
 """
 
+from __future__ import annotations
+
 from pathlib import Path
-from typing import List, Tuple, Optional, Set
+from typing import List, Tuple, Optional, Set, Any
 import numpy as np
 try:
     import torch
@@ -22,23 +24,24 @@ class VectorIndex:
         self.index_dir = Path(index_dir)
         self.index_dir.mkdir(parents=True, exist_ok=True)
         self.item_ids: List[int] = []
-        self.item_embeddings: Optional[torch.Tensor] = None
+        self.item_embeddings: Optional[Any] = None
         self.id_to_index: dict = {}
 
-    def build_index(self, item_ids: List[int], embeddings: torch.Tensor):
+    def build_index(self, item_ids: List[int], embeddings: Any):
         """
         Builds the retrieval index from item IDs and their dense L2-normalized embeddings.
         embeddings: [num_items, dim]
         """
         self.item_ids = [int(i) for i in item_ids]
         # Ensure tensor is CPU and float32 normalized
-        self.item_embeddings = embeddings.cpu().float()
+        self.item_embeddings = embeddings.cpu().float() if hasattr(embeddings, 'cpu') else embeddings
         self.id_to_index = {iid: idx for idx, iid in enumerate(self.item_ids)}
-        print(f"[VectorIndex] Built index with {len(self.item_ids)} item vectors (dim={self.item_embeddings.size(1)})")
+        dim = self.item_embeddings.size(1) if hasattr(self.item_embeddings, 'size') else 64
+        print(f"[VectorIndex] Built index with {len(self.item_ids)} item vectors (dim={dim})")
 
     def search(
         self,
-        query_vector: torch.Tensor,
+        query_vector: Any,
         top_k: int = 100,
         exclude_items: Optional[Set[int]] = None,
         category_filter: Optional[Set[int]] = None,

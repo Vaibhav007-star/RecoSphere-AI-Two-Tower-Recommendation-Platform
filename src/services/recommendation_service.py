@@ -4,6 +4,8 @@ Integrates Two-Tower Neural Retrieval, Vector Index, Multi-Objective Ranking,
 and Cold-Start Strategies behind a clean, production-grade interface.
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Set
 import json
