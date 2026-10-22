@@ -54,6 +54,10 @@ app = FastAPI(
 
 # Mount static files for modern web interface
 static_dir = BASE_DIR / "app" / "static"
+if not static_dir.exists():
+    static_dir = BASE_DIR / "public" / "static"
+if not static_dir.exists():
+    static_dir = Path("app/static")
 if static_dir.exists():
     app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
@@ -71,6 +75,8 @@ app.add_middleware(
 def serve_web_interface():
     """Serves the interactive RecoSphere AI web application."""
     index_path = BASE_DIR / "app" / "templates" / "index.html"
+    if not index_path.exists():
+        index_path = Path("app/templates/index.html")
     if index_path.exists():
         with open(index_path, "r", encoding="utf-8") as f:
             return f.read()
