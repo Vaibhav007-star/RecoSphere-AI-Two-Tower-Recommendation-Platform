@@ -7,12 +7,14 @@ and Cold-Start Strategies behind a clean, production-grade interface.
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Set
 import json
-import torch
+try:
+    import torch
+except ImportError:
+    torch = None
 import pandas as pd
 import numpy as np
 
 from configs.settings import MODELS_DIR, INDEX_DIR, PROCESSED_DATA_DIR, RankingConfig
-from src.models.training import TwoTowerTrainer
 from src.retrieval.index import VectorIndex
 from src.ranking.ranker import RecommendationRanker
 from src.models.baselines import PopularityRecommender, CategoryAffinityRecommender
@@ -108,10 +110,11 @@ class RecommendationService:
         # Load vector index
         index_loaded = self.vector_index.load("item_index.pt")
 
-        # Load Two-Tower model
+        # Load Two-Tower model if torch is available
         model_path = self.models_dir / "best_two_tower_model.pt"
-        if model_path.exists():
+        if model_path.exists() and torch is not None:
             try:
+                from src.models.training import TwoTowerTrainer
                 self.model = TwoTowerTrainer.load_model(model_path)
                 print("[RecommendationService] Loaded Two-Tower neural model successfully.")
             except Exception as e:
@@ -240,6 +243,21 @@ class RecommendationService:
             category_filter=category_filter,
             item_to_category={iid: m.get("categoryid") for iid, m in self.item_metadata.items()},
         )
+
+        # Fallback if vector embeddings not available (e.g., serverless environments)
+        if not similar_tuples and item_id in self.item_metadata:
+            target_cat = self.item_metadata[item_id].get("categoryid")
+            candidates = []
+            for iid, m in self.item_metadata.items():
+                if iid == item_id:
+                    continue
+                if category_filter and m.get("categoryid") not in category_filter:
+                    continue
+                same_cat = (m.get("categoryid") == target_cat and target_cat is not None)
+                score = 0.85 if same_cat else 0.45
+                candidates.append((iid, score))
+            candidates.sort(key=lambda x: (x[1], self.item_metadata.get(x[0], {}).get("popularity_score", 0)), reverse=True)
+            similar_tuples = candidates[:top_n]
 
         results = []
         for rank, (sim_id, sim_score) in enumerate(similar_tuples, 1):

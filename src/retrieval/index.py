@@ -7,7 +7,10 @@ with fallback to PyTorch tensor matrix multiplication.
 from pathlib import Path
 from typing import List, Tuple, Optional, Set
 import numpy as np
-import torch
+try:
+    import torch
+except ImportError:
+    torch = None
 
 from configs.settings import INDEX_DIR
 
@@ -113,12 +116,16 @@ class VectorIndex:
     def load(self, name: str = "item_index.pt") -> bool:
         """Loads index from disk."""
         load_path = self.index_dir / name
-        if not load_path.exists():
+        if torch is None or not load_path.exists():
             return False
-        data = torch.load(load_path, map_location="cpu")
-        self.item_ids = data["item_ids"]
-        self.item_embeddings = data["embeddings"]
-        self.id_to_index = {iid: idx for idx, iid in enumerate(self.item_ids)}
-        print(f"[VectorIndex] Loaded index with {len(self.item_ids)} items from {load_path}")
-        return True
+        try:
+            data = torch.load(load_path, map_location="cpu")
+            self.item_ids = data["item_ids"]
+            self.item_embeddings = data["embeddings"]
+            self.id_to_index = {iid: idx for idx, iid in enumerate(self.item_ids)}
+            print(f"[VectorIndex] Loaded index with {len(self.item_ids)} items from {load_path}")
+            return True
+        except Exception as e:
+            print(f"[VectorIndex] Warning loading index: {e}")
+            return False
 
